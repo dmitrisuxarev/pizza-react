@@ -3,7 +3,7 @@ import React from 'react'
 export default function Category({clickHandler,category}) {
 
     let categoryList = ["Все","Мясные","Вегетарианская","Гриль","Острые","Закрытые"]
-console.log(category);
+
     return (
         <div className="categories">
         {/* <ul onClick={e=> console.log([...e.children].indexOf(e.target))}> */}
