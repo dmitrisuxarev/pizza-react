@@ -6,7 +6,7 @@ import PizzaBlock from "../components/PizzaBlock";
 
 export default function Main() {
     let [pizzasList,setPizzasList] = useState([])
-    let [pizzas,setPizzas] = useState([])
+    let [filteredPizza,setFilteredPizza] = useState([])
     let [category,setCategory] = useState(0)
     //TODO подумать как сделать фильтрацию
     useEffect(()=>{
@@ -15,16 +15,17 @@ export default function Main() {
 
     useEffect(()=>{
         if(category===0){
-            setPizzas(pizzasList);
+          setFilteredPizza(pizzasList);
             return
         }
         let filteredPizzas = pizzasList.filter(i=>i.category===category)
-        setPizzas(filteredPizzas)
-    },[category])
+        setFilteredPizza(filteredPizzas)
+    },[category,pizzasList])
 
     function categoryHandler(category) {
         setCategory(category)
     }
+    
   return (
     <div className="content">
       <div className="container">
@@ -34,7 +35,7 @@ export default function Main() {
         </div>
         <h2 className="content__title">Все пиццы</h2>
         <div className="content__items">
-            {pizzas.map(i=>{
+            {filteredPizza.map(i=>{
             return <PizzaBlock 
             key={i.id} 
             id={i.id}

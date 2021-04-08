@@ -1,7 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 export default function PizzaBlock({id,imageUrl,name,types,sizes,price,category,rating}) {
-    let type = ["тонкое","традиционное"]
+    let pizzaType = ["тонкое","традиционное"]
+
+    let [type,setType] = useState(0);
+    let [size,setSize] = useState(0);
+
+    function getLiIndex(e) {
+      return [...e.target.parentNode.children].indexOf(e.target)
+    }
 
     return (
         <div className="pizza-block">
@@ -12,14 +19,14 @@ export default function PizzaBlock({id,imageUrl,name,types,sizes,price,category,
             />
             <h4 className="pizza-block__title">{name}</h4>
             <div className="pizza-block__selector">
-              <ul>
+              <ul onClick={e=>setType(getLiIndex(e))}>
                   {
-                      types.map((t,index)=>index===0?<li className="active">{type[t]}</li>:<li>{type[t]}</li>)
+                      types.map((t,index)=>index===type?<li className="active">{pizzaType[t]}</li>:<li>{pizzaType[t]}</li>)
                   }
               </ul>
-              <ul>
+              <ul onClick={e=>setSize(getLiIndex(e))}>
                   {
-                      sizes.map((size,index)=>index===0?<li className="active">{size} см.</li>:<li>{size} см.</li>)
+                      sizes.map((_size,index)=>index===size?<li className="active">{_size} см.</li>:<li>{_size} см.</li>)
                   }
               </ul>
             </div>

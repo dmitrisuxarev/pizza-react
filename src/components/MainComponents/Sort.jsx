@@ -1,10 +1,35 @@
-import React from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 
 export default function Sort() {
     //TODO Сделать поп-ап Сортировки
+    let sortList = ["популярности","цене","алфавиту"];
+
+    let [visiblePopUp,setVisiblePopUp] = useState(false);
+    let [sort,setSort] = useState(0);
+
+  
+   let closePopUp = useCallback((e)=>{
+      if(!(!!e.target.closest(".sort__popup"))){
+        setVisiblePopUp(false)
+      }
+  },[])
+  
+    useEffect(()=>{
+    console.log("now "+visiblePopUp);
+    if(visiblePopUp!==false){
+      window.addEventListener('click',closePopUp)
+    }else{
+      window.removeEventListener('click',closePopUp)
+    }
+  },[visiblePopUp])
+
+  function getLiIndex(e) {
+    return [...e.target.parentNode.children].indexOf(e.target)
+  }
+
     return (
         <div className="sort">
-        <div className="sort__label">
+        <div className={visiblePopUp?"sort__label active":"sort__label"}>
           <svg
             width="10"
             height="6"
@@ -18,15 +43,15 @@ export default function Sort() {
             />
           </svg>
           <b>Сортировка по:</b>
-          <span>популярности</span>
+          <span onClick={()=>{setVisiblePopUp(!visiblePopUp)}}>{sortList[sort]}</span>
         </div>
-        <div className="sort__popup">
-          <ul>
-            <li className="active">популярности</li>
-            <li>цене</li>
-            <li>алфавиту</li>
+        { visiblePopUp && <div className="sort__popup">
+          <ul onClick={e=>{setSort(getLiIndex(e));setVisiblePopUp(false)}}>
+           {
+             sortList.map((_sort,i)=>i===sort?<li className="active">{_sort}</li>:<li>{_sort}</li>)
+           }
           </ul>
-        </div>
+        </div>}
       </div>
     )
 }
