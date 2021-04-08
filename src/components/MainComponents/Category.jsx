@@ -12,6 +12,7 @@ export default function Category({clickHandler,category}) {
             clickHandler(index)
         }}>
           {
+              
               categoryList.map((name,i)=><CategoryItem active={i===category} name={name}/>)
           }
         </ul>
