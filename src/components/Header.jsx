@@ -1,6 +1,10 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 
 export default function Header() {
+
+    let itemsInCart = useSelector(state => state.quantity)
+    let totalSumm = useSelector(state => state.totalSumm)
     return (
         <div className="header">
         <div className="container">
@@ -13,7 +17,7 @@ export default function Header() {
           </div>
           <div className="header__cart">
             <a href="/cart.html" className="button button--cart">
-              <span>520 ₽</span>
+              <span>{totalSumm} ₽</span>
               <div className="button__delimiter"></div>
               <svg
                 width="18"
@@ -44,7 +48,7 @@ export default function Header() {
                   stroke-linejoin="round"
                 />
               </svg>
-              <span>3</span>
+              <span>{itemsInCart}</span>
             </a>
           </div>
         </div>

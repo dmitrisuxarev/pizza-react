@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
+import { addPizzaToCart } from '../store/actions/CartActions';
 
 export default function PizzaBlock({id,imageUrl,name,types,sizes,price,category,rating}) {
     let pizzaType = ["тонкое","традиционное"]
@@ -6,8 +8,23 @@ export default function PizzaBlock({id,imageUrl,name,types,sizes,price,category,
     let [type,setType] = useState(0);
     let [size,setSize] = useState(0);
 
+    const dispatch = useDispatch()
+
+    let quantity = useSelector(state => state.items).find(i=>i.id===id)?.quantity
+
+
     function getLiIndex(e) {
       return [...e.target.parentNode.children].indexOf(e.target)
+    }
+
+    function addHandler(){
+      let pizza = {
+        id,
+        type,
+        size,
+        price
+      }
+      dispatch(addPizzaToCart(pizza))
     }
 
     return (
@@ -32,7 +49,7 @@ export default function PizzaBlock({id,imageUrl,name,types,sizes,price,category,
             </div>
             <div className="pizza-block__bottom">
               <div className="pizza-block__price">от {price} ₽</div>
-              <div className="button button--outline button--add">
+              <div className="button button--outline button--add" onClick={addHandler}>
                 <svg
                   width="12"
                   height="12"
@@ -46,7 +63,9 @@ export default function PizzaBlock({id,imageUrl,name,types,sizes,price,category,
                   />
                 </svg>
                 <span>Добавить</span>
-                <i>2</i>
+                {quantity &&
+                 <i>{quantity}</i>
+                }
               </div>
             </div>
           </div>
