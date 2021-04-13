@@ -1,9 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
+import { getLiIndex, sortList } from "../../utitlitis";
 
 export default function Sort({ sort, setSort }) {
-  //TODO Сделать поп-ап Сортировки
-  let sortList = ["популярности", "цене", "алфавиту"];
-
   let [visiblePopUp, setVisiblePopUp] = useState(false);
 
   let closePopUp = useCallback((e) => {
@@ -20,10 +18,6 @@ export default function Sort({ sort, setSort }) {
       window.removeEventListener("click", closePopUp);
     }
   }, [visiblePopUp]);
-
-  function getLiIndex(e) {
-    return [...e.target.parentNode.children].indexOf(e.target);
-  }
 
   return (
     <div className="sort">

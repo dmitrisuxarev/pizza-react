@@ -93,7 +93,7 @@ a {
   -ms-flex-pack: justify;
   justify-content: space-between;
 }
-.header__logo {
+.header__logo a{
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;

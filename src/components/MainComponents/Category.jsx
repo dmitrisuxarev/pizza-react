@@ -1,15 +1,14 @@
 import React from 'react'
+import { categoryList, getLiIndex} from '../../utitlitis';
 
 export default function Category({clickHandler,category}) {
 
-    let categoryList = ["Все","Мясные","Вегетарианская","Гриль","Острые","Закрытые"]
+ 
 
     return (
         <div className="categories">
-        {/* <ul onClick={e=> console.log([...e.children].indexOf(e.target))}> */}
         <ul onClick={(e)=>{
-            let index = [...e.target.parentNode.children].indexOf(e.target);
-            clickHandler(index)
+            clickHandler(getLiIndex(e))
         }}>
           {
               categoryList.map((name,i)=><CategoryItem active={i===category} name={name}/>)

@@ -3,6 +3,7 @@ import { getPizzas } from "../API";
 import Category from "../components/MainComponents/Category";
 import Sort from "../components/MainComponents/Sort";
 import PizzaBlock from "../components/PizzaBlock";
+import { sortType } from "../utitlitis";
 
 export default function Main() {
   let [pizzasList, setPizzasList] = useState([]);
@@ -10,13 +11,12 @@ export default function Main() {
   let [category, setCategory] = useState(0);
   let [sortS, setSort] = useState(0);
 
-  let sortType = ["rating", "price", "name"];
 
-  //TODO подумать как сделать фильтрацию
+
   useEffect(() => {
     getPizzas(setPizzasList);
   }, []);
- 
+
   useEffect(() => {
     let temp = [...pizzasList];
     let filteredPizzas;
