@@ -11,7 +11,6 @@ export default function Sort({ sort, setSort }) {
   }, []);
 
   useEffect(() => {
-    console.log("now " + visiblePopUp);
     if (visiblePopUp !== false) {
       window.addEventListener("click", closePopUp);
     } else {

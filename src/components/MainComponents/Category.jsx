@@ -11,7 +11,7 @@ export default function Category({clickHandler,category}) {
             clickHandler(getLiIndex(e))
         }}>
           {
-              categoryList.map((name,i)=><CategoryItem active={i===category} name={name}/>)
+              categoryList.map((name,i)=><CategoryItem key={i} active={i===category} name={name}/>)
           }
         </ul>
       </div>

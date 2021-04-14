@@ -97,6 +97,7 @@ export default function Cart() {
             {pizzas.map((i) => {
               return (
                 <CartItem
+                key={i.id}
                   id={i.id}
                   imageUrl={i.imageUrl}
                   name={i.name}

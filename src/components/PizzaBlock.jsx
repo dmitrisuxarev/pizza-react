@@ -3,31 +3,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { pizzaType } from "../utitlitis";
 import { addPizzaToCart } from "../store/actions/CartActions";
 import {getLiIndex} from "../utitlitis"
-export default function PizzaBlock({
-  id,
-  imageUrl,
-  name,
-  types,
-  sizes,
-  price,
-}) {
+export default function PizzaBlock({pizza}) {
+
+  const dispatch = useDispatch();
   let [type, setType] = useState(0);
   let [size, setSize] = useState(0);
 
-  const dispatch = useDispatch();
-
-  let quantity = useSelector((state) => state.items).find((i) => i.id === id)
-    ?.quantity;
+  let {id,imageUrl,name,types,sizes,price} = pizza
+ 
+  let quantity = useSelector((state) => state.items).find((i) => i.id === id)?.quantity;
 
   function addHandler() {
-    let pizza = {
-      id,
-      name,
-      imageUrl,
-      type,
-      size: sizes[size],
-      price,
-    };
     dispatch(addPizzaToCart(pizza));
   }
 
@@ -39,18 +25,18 @@ export default function PizzaBlock({
         <ul onClick={(e) => setType(getLiIndex(e))}>
           {types.map((t, index) =>
             index === type ? (
-              <li className="active">{pizzaType[t]}</li>
+              <li key={index} className="active">{pizzaType[t]}</li>
             ) : (
-              <li>{pizzaType[t]}</li>
+              <li key={index}>{pizzaType[t]}</li>
             )
           )}
         </ul>
         <ul onClick={(e) => setSize(getLiIndex(e))}>
           {sizes.map((_size, index) =>
             index === size ? (
-              <li className="active">{_size} см.</li>
+              <li key={index} className="active">{_size} см.</li>
             ) : (
-              <li>{_size} см.</li>
+              <li key={index}>{_size} см.</li>
             )
           )}
         </ul>

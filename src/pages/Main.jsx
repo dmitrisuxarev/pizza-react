@@ -51,14 +51,7 @@ export default function Main() {
             return (
               <PizzaBlock
                 key={i.id}
-                id={i.id}
-                imageUrl={i.imageUrl}
-                name={i.name}
-                types={i.types}
-                sizes={i.sizes}
-                price={i.price}
-                category={i.category}
-                rating={i.rating}
+               pizza={i}
               />
             );
           })}

@@ -1,14 +1,12 @@
-export function AddPizzaOrQuantity(pizza, pizzasList) {
-  let existingPizza =
-    typeof pizza === "number"
-      ? pizzasList.find((i) => i.id === pizza)
-      : pizzasList.find((i) => i.id === pizza.id);
+
+export  function AddPizzaOrQuantity(pizza, pizzasList) {
+  let existingPizza = pizzasList.find((i) => i.id === (pizza.id || pizza))
 
   if (existingPizza) {
-    return pizzasList.map((pizza) => {
-      return pizza.id === existingPizza.id
-        ? { ...pizza, quantity: pizza.quantity + 1 }
-        : pizza;
+    return pizzasList.map((pizzaInCart) => {
+      return pizzaInCart.id === existingPizza.id
+        ? { ...pizzaInCart, quantity: pizzaInCart.quantity + 1 }
+        : pizzaInCart;
     });
   } else {
     return [...pizzasList, { ...pizza, quantity: 1 }];
